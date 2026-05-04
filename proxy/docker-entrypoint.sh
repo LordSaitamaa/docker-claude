@@ -14,7 +14,7 @@ if [[ -n "${EXTRA_DOMAINS}" ]]; then
     for domain in "${DOMAINS[@]}"; do
         domain="$(echo "${domain}" | xargs)"
         [[ -z "${domain}" ]] && continue
-        EXTRA_ACL_LINES+="acl allowed_domains dstdomain ${domain}\n"
+        EXTRA_ACL_LINES+="acl allowed_domains dstdomain ${domain}"$'\n'
     done
 fi
 
