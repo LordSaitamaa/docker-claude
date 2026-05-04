@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN squid -z --foreground 2>/dev/null || true
 
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod 755 /usr/local/bin/docker-entrypoint.sh
+RUN sed -i 's/\r//' /usr/local/bin/docker-entrypoint.sh \
+    && chmod 755 /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 3128
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

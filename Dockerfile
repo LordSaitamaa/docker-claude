@@ -21,7 +21,9 @@ RUN apk add --no-cache \
 ENV SHELL=/bin/bash
 
 COPY --chown=claude:claude config/tmux.conf /home/users/claude/.tmux.conf
-COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN sed -i 's/\r//' /usr/local/bin/entrypoint.sh \
+    && chmod 755 /usr/local/bin/entrypoint.sh
 
 USER ${USER_UID}:${USER_GID}
 
